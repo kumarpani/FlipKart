@@ -1,0 +1,54 @@
+<project name="Flipkart_Framework" default="compile" basedir=".">
+	<description>
+        simple example build file
+    </description>
+	<!-- set global properties for this build -->
+	
+	<property name="src.dir" location="src"/>
+	<property name="lib.dir"  location="lib"/>
+	<property name="build.dir" location="build"/>
+	
+	<path id="classpath">
+	    <fileset dir="${lib.dir}" includes="**/*.jar"/>
+		<pathelement location="${lib.dir}/testng-6.3.1.jar"/>
+		<pathelement location="${lib.dir}/selenium-server-standalone-2.15.0.jar"/>
+		<pathelement location="${lib.dir}/jxl.jar"/>
+		<pathelement location="${build.dir}"/>
+	</path>
+	
+	<taskdef name="testng" classpathref="classpath" classname="org.testng.TestNGAntTask" />
+
+	<target name="clean" description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build.dir}"/>
+	</target>
+	
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build.dir}"/>
+		<copy todir="${build.dir}">
+            <fileset dir="${lib.dir}"/>
+        </copy>
+		<copy todir="${build.dir}">
+            <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        </copy>
+		<copy todir="${build.dir}">
+            <fileset dir="${src.dir}" excludes="**/*.java" includes="App.properties"/>
+        </copy>
+
+	</target>
+	
+	<target name="compile" description="compile the source " depends="clean,init">
+		<!-- Compile the java code from ${src.dir} into ${build.dir} -->
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref = "classpath"/>
+	</target>
+	
+	<target name="runSearchTests" depends = "compile">
+		<testng classpathref="classpath" groups="search">
+			<classfileset dir="${build.dir}"/>
+		</testng>
+	</target>
+	
+</project>
