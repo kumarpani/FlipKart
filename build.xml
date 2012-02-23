@@ -1,4 +1,4 @@
-<project name="Flipkart_Framework" default="compile" basedir=".">
+<project name="Flipkart_Framework" default="runSearchTests" basedir=".">
 	<description>
         simple example build file
     </description>
