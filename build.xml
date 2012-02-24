@@ -48,8 +48,8 @@
 	<target name="runSearchTests" depends = "compile">
 		<testng classpathref="classpath" groups="search">
 			<classfileset dir="${build.dir}"/>
-	    <echo message=" Tests completed !!"/>
 		</testng>
+	    <echo message=" Tests completed !!"/>
 	</target>
 		<target name="completed" depends = "runSearchTests">
 		    <echo message="All Tasts completed !!"/>
