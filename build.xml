@@ -1,4 +1,4 @@
-<project name="Flipkart_Framework" default="runSearchTests" basedir=".">
+<project name="Flipkart_Framework" default="completed" basedir=".">
 	<description>
         simple example build file
     </description>
@@ -48,7 +48,11 @@
 	<target name="runSearchTests" depends = "compile">
 		<testng classpathref="classpath" groups="search">
 			<classfileset dir="${build.dir}"/>
+	    <echo message=" Tests completed !!"/>
 		</testng>
+		<target name="completed" depends = "runSearchTests">
+		    <echo message="All Tasts completed !!"/>
+		      </target>
 	</target>
 	
 </project>
