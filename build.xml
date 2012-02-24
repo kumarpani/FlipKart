@@ -50,9 +50,9 @@
 			<classfileset dir="${build.dir}"/>
 	    <echo message=" Tests completed !!"/>
 		</testng>
+	</target>
 		<target name="completed" depends = "runSearchTests">
 		    <echo message="All Tasts completed !!"/>
 		      </target>
-	</target>
 	
 </project>
