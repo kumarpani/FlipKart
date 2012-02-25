@@ -1,4 +1,4 @@
-<project name="Flipkart_Framework" default="completed" basedir=".">
+<project name="Flipkart_Framework" default="runSearchTests" basedir=".">
 	<description>
         simple example build file
     </description>
@@ -10,14 +10,13 @@
 	
 	<path id="classpath">
 	    <fileset dir="${lib.dir}" includes="**/*.jar"/>
-		<pathelement location="${lib.dir}/testng-6.3.1.jar"/>
+		<pathelement location="${lib.dir}/testng-6.4.jar"/>
 		<pathelement location="${lib.dir}/selenium-server-standalone-2.15.0.jar"/>
 		<pathelement location="${lib.dir}/jxl.jar"/>
 		<pathelement location="${build.dir}"/>
 	</path>
 	
-	<taskdef name="testng" classpathref="classpath" classname="org.testng.TestNGAntTask" />
-
+ 
 	<target name="clean" description="clean up" >
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build.dir}"/>
@@ -42,17 +41,15 @@
 	
 	<target name="compile" description="compile the source " depends="clean,init">
 		<!-- Compile the java code from ${src.dir} into ${build.dir} -->
-		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref = "classpath"/>
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref = "classpath" includeantruntime="false"/>
 	</target>
-	
+
+	<taskdef name="testng" classpathref="classpath" classname="org.testng.TestNGAntTask" />
 	<target name="runSearchTests" depends = "compile">
-		<testng classpathref="classpath" groups="search">
-			<classfileset dir="${build.dir}"/>
+	    <echo message=" Tests Started !!"/>
+		<testng classpathref="classpath" dumpCommand="true" groups="search">
+			<classfileset dir="${build.dir}" includes="com/example/tests/*.class"/>
 		</testng>
 	    <echo message=" Tests completed !!"/>
 	</target>
-		<target name="completed" depends = "runSearchTests">
-		    <echo message="All Tasts completed !!"/>
-		      </target>
-	
 </project>
