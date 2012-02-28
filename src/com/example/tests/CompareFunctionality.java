@@ -14,6 +14,7 @@ import com.example.pages.HomePage;
 
 public class CompareFunctionality {
 	private WebDriver driver;
+	
 
 	@BeforeClass
 	public void setUp() throws IOException {
